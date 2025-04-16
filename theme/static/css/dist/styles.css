@@ -226,9 +226,6 @@
   .justify-center {
     justify-content: center;
   }
-  .bg-\(--bg-principal\) {
-    background-color: var(--bg-principal);
-  }
   .bg-gray-50 {
     background-color: var(--color-gray-50);
   }
