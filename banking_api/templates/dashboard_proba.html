@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+
+{% block content%}
+
+
+<div>
+    {% for account_id, account in account_data.items %}
+        <div class="mt-10">
+            <h3>Account ID: {{ account_id }}</h3>
+            <div>{{ account.balance }}</div> <!-- Renders full JSON if needed -->
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
