@@ -1,0 +1,33 @@
+{% load static %}
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {% tailwind_css %}
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        
+        {% include 'partials/base_styles.html' %}
+    </head>
+
+    <body class="text-primary bg-primary_bg">
+
+        {% block header %}
+            <header class="py-10 bg-primary_bg">
+                <h1 class="px-70 text-2xl font-semibold">Finovara</h1>
+            </header>
+        {% endblock %}
+
+        <main class="mx-70 mt-10">
+            {% block content%}
+            {% endblock %}
+        </main>
+
+    </body>
+
+</html>
