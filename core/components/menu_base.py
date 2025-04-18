@@ -105,9 +105,11 @@ def Menu_Mobile(menu_items):
             )
 
     return html.div({"class": "min-lg:hidden w-[90%] text-xl flex justify-end items-center relative"},
-            html.img({"src": menu_path, "class": "w-10 h-10"}),
-            html.div({"class": "absolute w-[300px] right-0 top-14 rounded-lg bg-[#FEFFF5] text-black shadow-lg"},
-                *[render_menu_item(item) for item in menu_items],
+            html.div({"id": "mobile-button-menu"},
+                html.img({"src": menu_path, "id": "svg-menu-button", "class": "w-10 h-10 "}),
+                html.div({"id": "div-menu-button", "class": "absolute w-[300px] right-0 top-14 rounded-lg bg-[#FEFFF5] text-black shadow-lg"},
+                    *[render_menu_item(item) for item in menu_items],
+                )
             )
         )
 
