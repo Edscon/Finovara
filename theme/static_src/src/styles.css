@@ -19,8 +19,11 @@
 @source '../**/templates/**/*.html';
 @source '../../templates/**/*.html';
 @source '../../**/templates/**/*.html';
+@source '../../../**/**/*.py';
+@source '../../../**/**/*.svg';
 
 @theme {
-  --color-primary_color: #e8e9c0;  /* Variable para el color primario */
+  --color-primary_color: #F8FCD7; /*#e8e9c0;  /* Variable para el color primario */
+  --color-secondary_color: #b0ed9c;
   --color-primary_color_bg: #203331; /* Variable para el color de fondo 203331*/
 }

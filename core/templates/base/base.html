@@ -1,5 +1,7 @@
 {% load static %}
 {% load static tailwind_tags %}
+{% load reactpy %}
+
 
 <!DOCTYPE html>
 
@@ -18,12 +20,10 @@
     <body class="text-primary_color bg-primary_color_bg">
 
         {% block header %}
-            <header class="py-10 bg-primary_color_bg">
-                <h1 class="px-70 text-2xl font-semibold">Finovara</h1>
-            </header>
+            {% component "core.components.MenuBase" %}
         {% endblock %}
 
-        <main class="mx-70 mt-10">
+        <main class="mx-60 mt-10">
             {% block content%}
             {% endblock %}
         </main>
