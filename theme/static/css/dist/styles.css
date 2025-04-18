@@ -224,9 +224,6 @@
   .h-screen {
     height: 100vh;
   }
-  .w-1\/5 {
-    width: calc(1/5 * 100%);
-  }
   .w-1\/7 {
     width: calc(1/7 * 100%);
   }
@@ -238,10 +235,6 @@
   }
   .justify-center {
     justify-content: center;
-  }
-  .border {
-    border-style: var(--tw-border-style);
-    border-width: 1px;
   }
   .bg-gray-50 {
     background-color: var(--color-gray-50);
@@ -288,11 +281,6 @@
     text-decoration-line: underline;
   }
 }
-@property --tw-border-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-leading {
   syntax: "*";
   inherits: false;
@@ -308,7 +296,6 @@
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
-      --tw-border-style: solid;
       --tw-leading: initial;
       --tw-font-weight: initial;
       --tw-tracking: initial;

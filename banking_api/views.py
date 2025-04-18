@@ -51,7 +51,7 @@ def dashboard_proba(request):
     if requisition_id and access_key:
         try:
             requisition = get_requisition_details(access_key, requisition_id)
-            
+            print(requisition)
             accounts = requisition.get('accounts', [])
             
             for account_id in accounts:

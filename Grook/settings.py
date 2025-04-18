@@ -36,6 +36,10 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+
+    'reactpy_django',
+    'daphne',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -147,3 +151,7 @@ INTERNAL_IPS = [
 ]
 
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+
+######### REACTPY CONFIGURATION ASGI #########
+
+ASGI_APPLICATION = "Grook.asgi.application"
