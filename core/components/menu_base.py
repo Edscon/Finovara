@@ -34,9 +34,11 @@ def MenuBase():
         },
     ]
 
-    return html.header({"class": "py-10 bg-primary_color_bg text-white"},
+    LOGO = 'Finovara'
+
+    return html.header({"class": "py-4 bg-primary_color_bg text-white"},
         html.div({"class": "mx-auto max-w-[90%] xl:max-w-[80%] flex items-center h-20"},
-            html.h1({"class": "w-[10%] text-3xl font-bold flex items-center"}, "Finovara"),
+            html.h1({"class": "w-[10%] text-3xl font-bold flex items-center"}, LOGO),
             Menu_PC(menu_items),
             Menu_Mobile(menu_items),
             django_js("js/core_components/menu_base.js")
@@ -67,7 +69,7 @@ def Menu_PC(menu_items):
         else:
             return html.a({
                 "href": item['url'],
-                "class":  "hover:underline px-3"
+                "class":  "hover:text-secondary_color px-3"
             }, item['name'])
         
     
@@ -91,24 +93,58 @@ def Menu_PC(menu_items):
         render_AuthLinks()
     )
 
+
+
 @component
 def Menu_Mobile(menu_items):
 
     menu_path = f"/static/svg/menu.svg"
 
     def render_menu_item(item):
-        return html.div({},
-                html.a({
-                    "href": item['url'],
-                    "class":  "hover:underline px-3"
-                }, item['name'])          
+
+        icon_path = f"/static/svg/arrow.svg"
+
+
+        if 'submenu' in item:
+            return html.div({"class": "mx-5 my-7 text-base font-medium text-black"},
+                html.div({"class": "toggle-submenu flex justify-between cursor-pointer"}, 
+                    html.div(item['name']),
+                    html.img({"src": icon_path, "class": "invert w-6 h-6 rotate-180 transform transition-transform duration-100 delay-150 group-hover:rotate-0 scale-50 select-none"}),
+                ),
+                html.div({"class": "submenu-content hidden"},
+                    *[html.a({
+                        "href": sub['url'],
+                        "class": "block px-4 py-2 hover:bg-[#2b373b] hover:text-white rounded-full"
+                    }, sub['name']) for sub in item['submenu']]  
+                )
             )
 
+        return html.div({"class": "mx-5 my-7 text-base font-medium text-black"},
+                html.a({ "href": item['url'], "class":  "flex justify-between cursor-pointer"}, 
+                    item['name']
+                ),   
+            )
+    
+    def render_AuthLinks():
+        return html.div({"class": ""},
+            html.a({
+                "href": safe_reverse('login'),
+                "class": "mx-3 my-4 px-2 py-1.5 text-base shadow-xl border border-gray-200 rounded-full font-semibold flex justify-center"
+            }, html.div("Login")),
+
+            html.a({
+                "href": safe_reverse('signup'),
+                "class": "mx-3 my-4 px-2 py-1.5 text-base text-black bg-red-100 shadow-xl border border-gray-200 rounded-full font-semibold flex justify-center"
+            }, html.div("Sign Up"))
+        )
+
+
     return html.div({"class": "min-lg:hidden w-[90%] text-xl flex justify-end items-center relative"},
-            html.div({"id": "mobile-button-menu"},
-                html.img({"src": menu_path, "id": "svg-menu-button", "class": "w-10 h-10 "}),
-                html.div({"id": "div-menu-button", "class": "absolute w-[300px] right-0 top-14 rounded-lg bg-[#FEFFF5] text-black shadow-lg"},
+            html.div({"class": ""},
+                html.img({"src": menu_path, "id": "svg-menu-button", "class": "w-8 h-8 cursor-pointer"}),
+                html.div({"id": "div-menu-button", "class": "hidden absolute w-[300px] right-0 top-14 rounded-xl bg-[#FEFFF5] text-black shadow-lg"},
                     *[render_menu_item(item) for item in menu_items],
+                    render_AuthLinks()
                 )
             )
         )
