@@ -14,13 +14,12 @@
         {% tailwind_css %}
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
         
-        {% include 'partials/base_styles.html' %}
     </head>
 
     <body class="text-primary_color">
 
         {% block header %}
-            {% component "core.components.MenuBase" %}
+            {% include 'partials/menuBase.html' %}
         {% endblock %}
 
         <main>

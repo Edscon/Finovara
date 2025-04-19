@@ -5,4 +5,5 @@ from core.views import *
 
 urlpatterns = [
     path('', frontpage, name='frontpage'),
+    path('signup/', frontpage, name='signup'),
 ]
