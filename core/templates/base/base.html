@@ -17,13 +17,13 @@
         {% include 'partials/base_styles.html' %}
     </head>
 
-    <body class="text-primary_color bg-primary_color_bg">
+    <body class="text-primary_color">
 
         {% block header %}
             {% component "core.components.MenuBase" %}
         {% endblock %}
 
-        <main class="mx-60 mt-10">
+        <main>
             {% block content%}
             {% endblock %}
         </main>

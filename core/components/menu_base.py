@@ -37,7 +37,7 @@ def MenuBase():
     LOGO = 'Finovara'
 
     return html.header({"class": "py-4 bg-primary_color_bg text-white"},
-        html.div({"class": "mx-auto max-w-[90%] xl:max-w-[80%] flex items-center h-20"},
+        html.div({"class": "mx-auto max-w-[95%] xl:max-w-[82%] flex items-center h-20"},
             html.h1({"class": "w-[10%] text-3xl font-bold flex items-center"}, LOGO),
             Menu_PC(menu_items),
             Menu_Mobile(menu_items),
