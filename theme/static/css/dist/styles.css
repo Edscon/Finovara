@@ -404,6 +404,9 @@
   .h-\[calc\(100vh-10rem\)\] {
     height: calc(100vh - 10rem);
   }
+  .h-\[calc\(100vh-112px\)\] {
+    height: calc(100vh - 112px);
+  }
   .h-screen {
     height: 100vh;
   }
@@ -572,6 +575,12 @@
   }
   .py-18 {
     padding-block: calc(var(--spacing) * 18);
+  }
+  .pt-18 {
+    padding-top: calc(var(--spacing) * 18);
+  }
+  .pb-5 {
+    padding-bottom: calc(var(--spacing) * 5);
   }
   .text-center {
     text-align: center;
