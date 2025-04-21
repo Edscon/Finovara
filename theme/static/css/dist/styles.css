@@ -298,6 +298,9 @@
       max-width: 96rem !important;
     }
   }
+  .m-auto {
+    margin: auto;
+  }
   .mx-3 {
     margin-inline: calc(var(--spacing) * 3);
   }
@@ -392,6 +395,12 @@
   .h-40 {
     height: calc(var(--spacing) * 40);
   }
+  .h-\[20\%\] {
+    height: 20%;
+  }
+  .h-\[50\%\] {
+    height: 50%;
+  }
   .h-\[calc\(100vh-5rem\)\] {
     height: calc(100vh - 5rem);
   }
@@ -475,6 +484,9 @@
   }
   .content-between {
     align-content: space-between;
+  }
+  .content-stretch {
+    align-content: stretch;
   }
   .items-center {
     align-items: center;
