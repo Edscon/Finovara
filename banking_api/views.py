@@ -6,8 +6,9 @@ from .views_requests_api import *
 
 def connection(request):
 
-    access_key = ApiKey.objects.filter(name='access_key').first()
-
+    #access_key = ApiKey.objects.filter(name='access_key').first()
+    access_key = get_access_token()['access']
+    print(access_key)
     institutions = get_institutions(access_key, 'es')
 
     #Para Pruebas
