@@ -37,9 +37,6 @@ ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 INSTALLED_APPS = [
     'django.contrib.admin',
 
-    'reactpy_django',
-    'daphne',
-
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -151,7 +148,3 @@ INTERNAL_IPS = [
 ]
 
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
-
-######### REACTPY CONFIGURATION ASGI #########
-
-ASGI_APPLICATION = "Grook.asgi.application"

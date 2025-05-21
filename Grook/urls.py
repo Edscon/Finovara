@@ -5,7 +5,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('_reload_/', include('django_browser_reload.urls')),
-    path('reactpy/', include('reactpy_django.http.urls')),
 
     path('admin/', admin.site.urls),
 
