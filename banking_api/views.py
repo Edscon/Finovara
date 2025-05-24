@@ -12,8 +12,7 @@ import time
 @csrf_exempt
 async def institutions_api(request):
     try:
-        access_key = async_get_access_token()['access']
-        print(access_key)
+        #access_key = async_get_access_token()['access']
         #institutions = get_institutions(access_key, 'es')
 
         #Ejemplo
