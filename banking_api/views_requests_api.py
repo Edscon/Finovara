@@ -1,12 +1,13 @@
 import os
 from dotenv import load_dotenv
 import requests
+import httpx
 
 load_dotenv()
 
 def get_env_secrets():
     return {
-        "secret_id": os.getenv("SECRETID"),
+        "secret_id": os.getenv("GOCARDLESS_SECRETID"),
         "secret_key": os.getenv("SECRETKEY")
     }
 
@@ -28,23 +29,24 @@ REQUISITIONS_URL = f"{BASE_API_URL}/requisitions/"
 ACCOUNTS_URL = f"{BASE_API_URL}/accounts/"
 
 # 1. Get Access Token
-def get_access_token():
-    response = requests.post(
-        ACCESS_KEY_URL,
-        headers=json_headers(),
-        json=get_env_secrets()
-    )
-    response.raise_for_status()
-    
-    #Actualizar ApiKeys en la base de datos
-    return response.json()
+async def async_get_access_token():
+    async with httpx.AsyncClient(timeout=10.0) as client:
+        response = await client.post(
+            ACCESS_KEY_URL,
+            headers=json_headers(),
+            json=get_env_secrets()
+        )
+        response.raise_for_status()
+        return response.json()
     
 # 2. Get institutions list by country
-def get_institutions(token: str, country_code: str = "es"):
+async def async_get_institutions(token: str, country_code: str = "ES"):
     url = f"{INSTITUTIONS_URL}?country={country_code}"
-    response = requests.get(url, headers=json_headers(token))
-    response.raise_for_status()
-    return response.json()
+
+    async with httpx.AsyncClient(timeout=10.0) as client:
+        response = await client.get(url, headers=json_headers(token))
+        response.raise_for_status()
+        return response.json()
 
 # 3. Create an agreement to access bank data
 def create_agreement(

@@ -1,11 +1,36 @@
 from django.shortcuts import render
 from django.urls import reverse
+from django.http import JsonResponse, HttpResponseServerError
+from django.views.decorators.csrf import csrf_exempt
 import json
 from keys.models import ApiKey
 from .views_requests_api import *
+from core.views import get_menu_items
 
-def connection(request):
+import time
 
+@csrf_exempt
+async def institutions_api(request):
+    try:
+        access_key = async_get_access_token()['access']
+        print(access_key)
+        #institutions = get_institutions(access_key, 'es')
+
+        #Ejemplo
+        time.sleep(4)
+        institutions = [
+            { 'id': 1, 'name': "Banco Santander", 'url_img': "https://logos.com/santander.png" },
+            { 'id': 2, 'name': "BBVA", 'url_img': "https://logos.com/bbva.png" },
+            { 'id': 3, 'name': "CaixaBank", 'url_img': "https://logos.com/caixabank.png" },
+            { 'id': 4, 'name': "Bankinter", 'url_img': "https://logos.com/bankinter.png" },
+            #{ 'id': 5, 'name': "ING", 'url_img': "https://logos.com/ing.png" },
+            ]
+
+        return JsonResponse(institutions, safe=False)
+    except requests.RequestException as e:
+        return HttpResponseServerError(f"Error obtenint institucions: {str(e)}")
+
+def altres(request):
     #access_key = ApiKey.objects.filter(name='access_key').first()
     access_key = get_access_token()['access']
     print(access_key)
@@ -33,13 +58,21 @@ def connection(request):
     )
 
 
+def app(request):
+
+    institutions = {}
+    requisition_data = {}
+
+
+    menu_items = get_menu_items()
     context = {
+        'menu_items': menu_items,
         'institutions': institutions,
         'url_link': requisition_data.get('link'),
+
     }
 
-    # You can add any logic here if needed
-    return render(request, 'connection.html', context)
+    return render(request, 'app_dashboard.html', context)
 
 def dashboard_proba(request):
     requisition_id = request.GET.get('ref')  # obte requisition ID de la URL

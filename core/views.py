@@ -2,13 +2,16 @@ from django.shortcuts import render
 from django.urls import reverse, NoReverseMatch
 from keys.models import ApiKey
 
-def safe_reverse(name):
-    try:
-        return reverse(name)
-    except NoReverseMatch:
-        return "#"  
+
 
 def get_menu_items():
+    
+    def safe_reverse(name):
+        try:
+            return reverse(name)
+        except NoReverseMatch:
+            return "#"  
+    
     return [
         {'name': 'Pricing', 'url': safe_reverse('pricing')},
         {'name': 'Producto', 'url': safe_reverse('producto')},
