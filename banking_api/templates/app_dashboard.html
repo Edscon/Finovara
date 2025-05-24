@@ -2,13 +2,21 @@
 
 {% block content%}
 
+
 <div class="h-screen text-black bg-secondary_color_bg">
 
     {% include 'partials/connect_institution.html' %}
+    <div class="flex">
 
-    <div class="max-w-[95%] lg:max-w-[90%] xl:max-w-[80%] 2xl:max-w-[75%] mx-auto min-h-screen">
+        <!-- Menu-dashboard -->
+        {% include 'partials/menuDashboard.html' %}
 
+        <div class="flex-1 min-h-screen p-6 bg-secondary_color_bg ml-[210px] overflow-auto">
+            <h1 class="text-2xl font-semibold">Dashboard</h1>
+            <div class="h-screen"></div>
+        </div>
     </div>
+    
 </div>
 
 {% endblock %}

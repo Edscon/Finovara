@@ -65,10 +65,10 @@ def app(request):
 
     menu_items = get_menu_items()
     context = {
-        'menu_items': menu_items,
+        'menu_name': 'app',
         'institutions': institutions,
         'url_link': requisition_data.get('link'),
-
+        
     }
 
     return render(request, 'app_dashboard.html', context)

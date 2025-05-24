@@ -1,0 +1,20 @@
+{% load svg_inline %}
+
+<div class="w-[210px] h-screen bg-primary_color_bg p-3 pt-6 text-white fixed top-0 left-0">
+    <div class="flex items-center justify-between">
+        <a href="{% url 'frontpage' %}" class="flex items-center">
+            <h1 class="text-2xl font-semibold leading-none">Finovara</h1>
+        </a>
+        <div class="text-secondary_color">{% inline_svg 'svg/arrow_left.svg' %}</div>
+    </div>
+    <nav class="mt-5">
+        <a href="{% url 'app' %}" class="flex items-center space-x-2 p-2 rounded-xl {% if menu_name == 'app' %}bg-[#4c5b5a]{% else %}hover:bg-[#4c5b5a]{% endif %}">
+            {% inline_svg 'svg/logos/dashboard_logo.svg' %}
+            <h2 class="font-normal">Dashboard</h2>
+        </a>
+        <a href="{% url 'app' %}" class="flex items-center space-x-2 p-2 rounded-xl {% if menu_name == 'bank' %}bg-[#4c5b5a]{% else %}hover:bg-[#4c5b5a]{% endif %}">
+            {% inline_svg 'svg/logos/bank_logo.svg' %}
+            <h2 class="font-normal">Bancos</h2>
+        </a>
+    </nav>
+</div>
