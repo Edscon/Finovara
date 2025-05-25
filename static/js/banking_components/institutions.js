@@ -7,22 +7,26 @@ let institutions = [];
 function renderInstitutions(filtered) {
     grid.innerHTML = '';
 
+    const ul = document.createElement('ul');
+    ul.className = "list-disc pl-5 grid gap-2 grid-cols-1 lg:grid-cols-2";
+
     filtered.forEach(inst => {
-    const card = document.createElement('div');
-    card.className = "flex flex-col items-center w-[120px] border border-gray-200 rounded cursor-pointer hover:shadow-md";
+        const li = document.createElement('li');
+        li.className = "flex items-center cursor-pointer py-2 hover:bg-gray-100 rounded";
 
-    card.innerHTML = `
-        <img src="${inst.logo}" alt="${inst.name}" class="w-25 h-25 object-contain mb-2" />
-        <span class="text-center text-sm font-medium px-3">${inst.name}</span>
-    `;
+        li.innerHTML = `
+            <img src="${inst.logo}" alt="${inst.name}" class="w-8 h-8 object-contain mr-3" />
+            <span class="text-sm font-medium">${inst.name}</span>
+        `;
 
-    card.onclick = () => {
-        alert("Has seleccionado: " + inst.name);
-        // Aquí puedes añadir lógica para cerrar modal o seguir flujo
-    };
+        li.onclick = () => {
+            alert("Has seleccionado: " + inst.name);
+        };
 
-    grid.appendChild(card);
+        ul.appendChild(li);
     });
+
+    grid.appendChild(ul);
 }
 
 // Evento input para filtro

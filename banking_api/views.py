@@ -13,8 +13,8 @@ import time
 async def institutions_api(request):
     try:
         access_key = await get_valid_access_token()
-        institutions = await async_get_institutions(access_key, 'es')
-
+        #institutions = await async_get_institutions(access_key, 'es')
+        
         #Ordenamos para que los principales bancos de España salgan primero
         order_names =['Banco Santander', 'BBVA', 'CaixaBank', 'Banco de Sabadell', 'Bankinter', 
                       'ING', 'Openbank', 'Unicaja Banco', 'Abanca', 'Kutxabank', 'Grupo Cajamar', 

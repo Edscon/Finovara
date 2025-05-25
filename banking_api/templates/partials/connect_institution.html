@@ -1,6 +1,9 @@
 {% load static %}
+{% load svg_inline %}
 
-<div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[550px] w-[800px] border border-gray-200 rounded-xl bg-white z-50 p-6">
+<div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-[550px] w-[800px] border border-gray-200 rounded-xl bg-white z-50 p-6 retaltive">
+
+    <div class="absolute right-5 text-black w-8 h-8">{% inline_svg 'svg/x-mark.svg' %}</div>
 
     <h2 class="text-xl font-semibold mb-4">Selecciona un banco para empezar</h2>
 
@@ -22,3 +25,7 @@
         <!-- Aquí irán las cards -->
     </div>
 </div>
+
+<!-- {% block scripts %}
+<script src="{% static 'js/banking_components/institutions.js' %}"></script>
+{% endblock %} -->

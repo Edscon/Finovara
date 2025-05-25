@@ -1,19 +1,20 @@
 function MenuButtonListener() {
     
     const submenu = document.getElementById("div-menu-button");
-    const icon = document.getElementById("svg-menu-button");
+    const icon_menu = document.getElementById("svg-menu-button");
+    const icon_x_mark = document.getElementById("svg-x-mark-button");
     
-    if (!submenu || !icon) return;
+    if (!submenu || !icon_menu || !icon_x_mark) return;
 
-    const iconMenu = '/static/svg/menu.svg';
-    const iconClose = '/static/svg/x-mark.svg';
+    const toggleMenu = () => {
+        submenu.classList.toggle('hidden');
+        icon_menu.classList.toggle('hidden');
+        icon_x_mark.classList.toggle('hidden');
+    };
 
-    icon.addEventListener("click", () => {
-        const isCloseIcon = icon.src.includes(iconClose); // Si ya está en modo "cerrar", volver al "menu"
+    icon_menu.addEventListener("click", toggleMenu);
+    icon_x_mark.addEventListener("click", toggleMenu);
 
-        icon.src = isCloseIcon ? iconMenu : iconClose;
-        submenu.classList.toggle('hidden'); // Alternar la visibilidad
-    });
 }
 MenuButtonListener();
 

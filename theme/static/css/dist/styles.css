@@ -13,6 +13,7 @@
     --color-blue-400: oklch(70.7% 0.165 254.624);
     --color-pink-200: oklch(89.9% 0.061 343.231);
     --color-gray-50: oklch(98.5% 0.002 247.839);
+    --color-gray-100: oklch(96.7% 0.003 264.542);
     --color-gray-200: oklch(92.8% 0.006 264.531);
     --color-gray-300: oklch(87.2% 0.01 258.338);
     --color-gray-500: oklch(55.1% 0.027 264.364);
@@ -234,6 +235,9 @@
   .right-0 {
     right: calc(var(--spacing) * 0);
   }
+  .right-5 {
+    right: calc(var(--spacing) * 5);
+  }
   .left-0 {
     left: calc(var(--spacing) * 0);
   }
@@ -341,6 +345,9 @@
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
   }
+  .mr-3 {
+    margin-right: calc(var(--spacing) * 3);
+  }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
   }
@@ -405,6 +412,12 @@
   .h-9 {
     height: calc(var(--spacing) * 9);
   }
+  .h-10 {
+    height: calc(var(--spacing) * 10);
+  }
+  .h-18 {
+    height: calc(var(--spacing) * 18);
+  }
   .h-20 {
     height: calc(var(--spacing) * 20);
   }
@@ -444,6 +457,12 @@
   .w-9 {
     width: calc(var(--spacing) * 9);
   }
+  .w-10 {
+    width: calc(var(--spacing) * 10);
+  }
+  .w-18 {
+    width: calc(var(--spacing) * 18);
+  }
   .w-20 {
     width: calc(var(--spacing) * 20);
   }
@@ -455,6 +474,9 @@
   }
   .w-\[10\%\] {
     width: 10%;
+  }
+  .w-\[80px\] {
+    width: 80px;
   }
   .w-\[90\%\] {
     width: 90%;
@@ -515,6 +537,12 @@
   .resize {
     resize: both;
   }
+  .list-disc {
+    list-style-type: disc;
+  }
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
   .flex-col {
     flex-direction: column;
   }
@@ -532,6 +560,9 @@
   }
   .justify-end {
     justify-content: flex-end;
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
@@ -671,6 +702,9 @@
   }
   .pb-5 {
     padding-bottom: calc(var(--spacing) * 5);
+  }
+  .pl-5 {
+    padding-left: calc(var(--spacing) * 5);
   }
   .text-center {
     text-align: center;
@@ -872,6 +906,11 @@
     }
   }
   @media (hover: hover) {
+    .hover\:bg-gray-100:hover {
+      background-color: var(--color-gray-100);
+    }
+  }
+  @media (hover: hover) {
     .hover\:bg-primary_color_bg:hover {
       background-color: var(--color-primary_color_bg);
     }
@@ -1023,6 +1062,11 @@
   @media (width >= 64rem) {
     .lg\:max-w-18\/20 {
       max-width: calc(18/20 * 100%);
+    }
+  }
+  @media (width >= 64rem) {
+    .lg\:grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   @media (width >= 64rem) {

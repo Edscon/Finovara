@@ -1,4 +1,5 @@
 {% load static %}
+{% load svg_inline %}
 
 <header class="py-4 bg-primary_color_bg text-white">
     <div class="mx-auto max-w-[95%] lg:max-w-18/20 xl:max-w-16/20 2xl:max-w-15/20 flex items-center h-20">
@@ -39,7 +40,9 @@
         <!-- Menu Mobile -->
         <div class="min-lg:hidden w-[90%] text-xl flex justify-end items-center relative">
             <div>
-                <img src="{% static 'svg/menu.svg' %}" id="svg-menu-button" class="w-8 h-8 cursor-pointer">
+                <div id="svg-menu-button" class="w-8 h-8 cursor-pointer" >{% inline_svg 'svg/menu.svg' %}</div>
+                <div id="svg-x-mark-button" class="w-8 h-8 cursor-pointer hidden" >{% inline_svg 'svg/x-mark.svg' %}</div>
+
                 <div id="div-menu-button" class="hidden absolute w-[300px] right-0 top-14 rounded-xl bg-[#FEFFF5] text-black shadow-lg">
                     {% for item in menu_items %}
                         {% if item.submenu %}
