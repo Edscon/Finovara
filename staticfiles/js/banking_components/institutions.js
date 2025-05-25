@@ -9,11 +9,11 @@ function renderInstitutions(filtered) {
 
     filtered.forEach(inst => {
     const card = document.createElement('div');
-    card.className = "flex flex-col items-center w-[120px] p-3 border border-gray-200 rounded-lg cursor-pointer hover:shadow-md";
+    card.className = "flex flex-col items-center w-[120px] border border-gray-200 rounded cursor-pointer hover:shadow-md";
 
     card.innerHTML = `
-        <img src="${inst.url_img}" alt="${inst.name}" class="w-20 h-20 object-contain mb-2" />
-        <span class="text-center text-sm font-medium">${inst.name}</span>
+        <img src="${inst.logo}" alt="${inst.name}" class="w-25 h-25 object-contain mb-2" />
+        <span class="text-center text-sm font-medium px-3">${inst.name}</span>
     `;
 
     card.onclick = () => {
@@ -36,8 +36,8 @@ input.addEventListener('input', e => {
 
 // Al cargar la página hacemos fetch al backend
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('Hola');
-    fetch('/app/institutions/')
+  
+    fetch('institutions/')
     .then(response => {
         if (!response.ok) throw new Error('Error en la petición');
         return response.json();
@@ -55,5 +55,6 @@ window.addEventListener('DOMContentLoaded', () => {
     .catch(error => {
         loadingDiv.innerHTML = '<span class="text-red-500">Error cargando instituciones.</span>';
         console.error(error);
+      
     });
 });
