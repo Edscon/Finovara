@@ -36,12 +36,14 @@ input.addEventListener('input', e => {
 
 // Al cargar la página hacemos fetch al backend
 window.addEventListener('DOMContentLoaded', () => {
+    console.log('Hola');
     fetch('/app/institutions/')
     .then(response => {
         if (!response.ok) throw new Error('Error en la petición');
         return response.json();
     })
     .then(data => {
+        
         institutions = data;
         renderInstitutions(institutions);
 

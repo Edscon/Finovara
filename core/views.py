@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.urls import reverse, NoReverseMatch
-from keys.models import ApiKey
 
 
 

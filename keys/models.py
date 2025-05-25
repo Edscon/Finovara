@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class ApiKey(models.Model):
-    name = models.CharField(max_length=255, default="default")
-    key = models.TextField()
-    updated_at = models.DateTimeField(auto_now=True)
+class ApiToken(models.Model):
+    access_token = models.TextField()
+    refresh_token = models.TextField()
+    access_expires_at = models.DateTimeField()
+    refresh_expires_at = models.DateTimeField()
 
     def __str__(self):
-        return self.key 
+        return self.access_token 

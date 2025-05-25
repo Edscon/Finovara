@@ -459,9 +459,6 @@
   .w-\[210px\] {
     width: 210px;
   }
-  .w-\[220px\] {
-    width: 220px;
-  }
   .w-\[300px\] {
     width: 300px;
   }
@@ -555,9 +552,6 @@
   }
   .rounded {
     border-radius: 0.25rem;
-  }
-  .rounded-2xl {
-    border-radius: var(--radius-2xl);
   }
   .rounded-full {
     border-radius: calc(infinity * 1px);
@@ -717,10 +711,6 @@
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
-  }
-  .font-thin {
-    --tw-font-weight: var(--font-weight-thin);
-    font-weight: var(--font-weight-thin);
   }
   .tracking-normal {
     --tw-tracking: var(--tracking-normal);
