@@ -1,3 +1,6 @@
+function isTouchDevice() {
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+}
 
 function MenuButtonListener() {
     
@@ -22,12 +25,16 @@ function MenuButtonListener() {
             icon_x_mark.classList.add('hidden');
         }
     };
+    
+    const eventType = isTouchDevice() ? 'touchstart' : 'click';
 
-    ['click'].forEach(evt => {
+    [eventType].forEach(evt => {
         icon_menu.addEventListener(evt, e => {
+            e.preventDefault();
             toggleMenu();
         });
         icon_x_mark.addEventListener(evt, e => {
+            e.preventDefault();
             toggleMenu();
         });
     });
