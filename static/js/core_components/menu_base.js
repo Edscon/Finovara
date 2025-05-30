@@ -1,3 +1,4 @@
+
 function MenuButtonListener() {
     
     const submenu = document.getElementById("div-menu-button");
@@ -17,6 +18,7 @@ function MenuButtonListener() {
 
 }
 MenuButtonListener();
+
 
 function toggleSubmenu() {
     document.querySelectorAll('.toggle-submenu').forEach(button => {

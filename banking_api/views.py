@@ -27,20 +27,53 @@ def get_institutions():
         print(f'Error fetching institutions: {e}')
         return []
 
-
 def app(request):
 
     institutions = get_institutions()
-    requisition_data = {}
 
     context = {
         'menu_name': 'app',
         'institutions': institutions,
-        'url_link': requisition_data.get('link'),
         
     }
 
     return render(request, 'app_dashboard.html', context)
+
+
+async def agreement_institution(request, id_code):
+    access_key = await get_valid_access_token()
+    print(access_key)
+    try:
+        institution = await sync_to_async(Institutions.objects.get)(id=id_code)
+        institution_id = institution.id
+    except Institutions.DoesNotExist:
+        return HttpResponseServerError("Institution not found")
+
+    #Only for sandbox!!!!!!
+    institution_id = 'SANDBOXFINANCE_SFIN0000'
+
+    # Create agreement
+    agreement = await async_create_agreement(
+        token=access_key,
+        institution_id=institution_id,
+        max_days=90,
+        valid_days=90,
+        access_scope=["balances", "details", "transactions"]
+    )
+    
+    # Create requisition
+    redirect_url = request.build_absolute_uri(reverse('app'))
+    requisition = await create_requisition(
+        token=access_key,
+        redirect_url=redirect_url,
+        institution_id=institution_id,
+        reference='ref123',
+        agreement_id=agreement['id'],
+        user_language='ES'
+    )
+    print(f'Agreement created: {requisition}')
+    return JsonResponse(requisition)
+
 
 def dashboard_proba(request):
     requisition_id = request.GET.get('ref')  # obte requisition ID de la URL

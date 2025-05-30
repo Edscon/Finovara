@@ -48,15 +48,15 @@ def frontpage(request):
 
     return render(request, 'corehtml/frontpage.html', context)
 
-"""
-This view is used to manage authentication, such as login, logout, and registration.
-"""
+
+
+
+### Authentication and Authorization Views ###
 @user_passes_test(is_superuser)
 def auth_manager(request):
     menu_items = get_menu_items()
     context = { 'menu_items': menu_items, }
     return render(request, 'corehtml/auth_manager.html', context)
-
 
 @csrf_exempt
 async def update_institutions(request):

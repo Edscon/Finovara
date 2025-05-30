@@ -133,7 +133,7 @@ def save_institution(item):
     )
 
 # 3. Create an agreement to access bank data
-def create_agreement(
+async def async_create_agreement(
     token: str,
     institution_id: str,
     max_days: int = 90,
@@ -149,13 +149,16 @@ def create_agreement(
         "access_valid_for_days": str(valid_days),
         "access_scope": access_scope
     }
+    url = AGREEMENTS_URL
 
-    response = requests.post(AGREEMENTS_URL, headers=json_headers(token), json=data)
-    response.raise_for_status()
-    return response.json()
+    async with httpx.AsyncClient(timeout=10.0) as client:
+        response = await client.post(url, headers=json_headers(token), json=data)
+        response.raise_for_status()
+        return response.json()
+
 
 # 4. Create a requisition (start auth process)
-def create_requisition(
+async def create_requisition(
     token: str,
     redirect_url: str,
     institution_id: str,
@@ -170,10 +173,12 @@ def create_requisition(
         "agreement": agreement_id,
         "user_language": user_language
     }
+    url = REQUISITIONS_URL
 
-    response = requests.post(REQUISITIONS_URL, headers=json_headers(token), json=data)
-    response.raise_for_status()
-    return response.json()
+    async with httpx.AsyncClient(timeout=10.0) as client:
+        response = await client.post(url, headers=json_headers(token), json=data)
+        response.raise_for_status()
+        return response.json()
 
 # 5. Obté els detalls d'una requisició, incloent els comptes bancaris disponibles.
 def get_requisition_details(token: str, requisition_id: str):
