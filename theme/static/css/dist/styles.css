@@ -486,11 +486,17 @@
   .w-full {
     width: 100%;
   }
+  .max-w-16 {
+    max-width: calc(var(--spacing) * 16);
+  }
   .max-w-\[95\%\] {
     max-width: 95%;
   }
   .max-w-\[300px\] {
     max-width: 300px;
+  }
+  .min-w-16 {
+    min-width: calc(var(--spacing) * 16);
   }
   .flex-1 {
     flex: 1;
