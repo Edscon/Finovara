@@ -5,6 +5,8 @@ function MenuButtonListener() {
 
     if (!submenu || !icon_menu || !icon_x_mark) return;
 
+    let isToggling = false;
+
     const openMenu = () => {
         submenu.classList.remove("hidden");
         icon_menu.classList.add("hidden");
@@ -19,19 +21,29 @@ function MenuButtonListener() {
 
     const handleToggle = (e) => {
         e.preventDefault();
-        if (submenu.classList.contains("hidden")) {
+
+        if (isToggling) return;
+        isToggling = true;
+
+        const isHidden = submenu.classList.contains("hidden");
+        if (isHidden) {
             openMenu();
         } else {
             closeMenu();
         }
+
+        // Esperar 300ms para volver a permitir toggle
+        setTimeout(() => {
+            isToggling = false;
+        }, 200);
     };
 
-    // Solo usar un tipo de evento dependiendo del dispositivo
     const eventType = "ontouchstart" in window ? "touchstart" : "click";
 
     icon_menu.addEventListener(eventType, handleToggle, { passive: false });
     icon_x_mark.addEventListener(eventType, handleToggle, { passive: false });
 }
+
 MenuButtonListener();
 
 function toggleSubmenu() {
