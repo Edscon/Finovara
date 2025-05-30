@@ -42,3 +42,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+//Fetch institution url
+document.querySelectorAll('#institutionsGrid > div').forEach(institutionDiv => {
+    institutionDiv.addEventListener('click', function() {
+        const institution_id = this.id;
+        console.log(institution_id);
+        
+        fetch(`agreement_institution/${institution_id}/`)
+            .then(r => r.ok ? r.json() : Promise.reject(`Error: ${r.status}`))
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('loading').innerHTML = '<span class="text-red-500">Error cargando instituciones.</span>';
+            });
+    });
+});
