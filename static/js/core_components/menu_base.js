@@ -13,8 +13,16 @@ function MenuButtonListener() {
         icon_x_mark.classList.toggle('hidden');
     };
 
-    icon_menu.addEventListener("click", toggleMenu);
-    icon_x_mark.addEventListener("click", toggleMenu);
+    ['click', 'touchstart'].forEach(evt => {
+        icon_menu.addEventListener(evt, e => {
+            e.preventDefault();
+            toggleMenu();
+        });
+        icon_x_mark.addEventListener(evt, e => {
+            e.preventDefault();
+            toggleMenu();
+        });
+    });
 
 }
 MenuButtonListener();

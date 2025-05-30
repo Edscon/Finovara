@@ -52,7 +52,7 @@ async def agreement_institution(request, id_code):
     #Only for sandbox!!!!!!
     institution_id = 'SANDBOXFINANCE_SFIN0000'
 
-    # Create agreement
+    # Create agreement 
     agreement = await async_create_agreement(
         token=access_key,
         institution_id=institution_id,
