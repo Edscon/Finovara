@@ -6,9 +6,15 @@ function MenuButtonListener() {
     
     if (!submenu || !icon_menu || !icon_x_mark) return;
 
-    submenu.classList.toggle('hidden');
-    icon_menu.classList.toggle('hidden');
-    icon_x_mark.classList.toggle('hidden');   
+    if (submenu.classList.contains('hidden')) {
+        submenu.classList.remove('hidden');
+        icon_menu.classList.add('hidden');
+        icon_x_mark.classList.remove('hidden');
+    } else {
+        submenu.classList.add('hidden');
+        icon_menu.classList.remove('hidden');
+        icon_x_mark.classList.add('hidden');
+    }  
 }
 
 function toggleSubmenu() {
