@@ -6,6 +6,7 @@ from django.utils import timezone
 import requests
 import httpx
 from keys.models import ApiToken 
+from .models import Institutions
 
 load_dotenv()
 
@@ -40,16 +41,15 @@ def get_token_from_db():
 
 @sync_to_async
 def save_token(data):
+    now = timezone.now()
+    defaults = {
+        'access_token': data['access'],
+        'access_expires_at': now + timedelta(seconds=data['access_expires']),
+        **({'refresh_token': data['refresh']} if 'refresh' in data else {}),
+        **({'refresh_expires_at': now + timedelta(seconds=data['refresh_expires'])} if 'refresh_expires' in data else {}),
+    }
 
-    token = ApiToken.objects.update_or_create(
-        id=1,
-        defaults={
-            'access_token': data['access'],
-            'refresh_token': data['refresh'],
-            'access_expires_at': timezone.now() + timedelta(seconds=data['access_expires']),
-            'refresh_expires_at': timezone.now() + timedelta(seconds=data['refresh_expires']),
-        }
-    )[0]
+    token, _ = ApiToken.objects.update_or_create(id=1, defaults=defaults)
 
     return token.access_token
 
@@ -73,7 +73,19 @@ async def refresh_tokens(refresh_token):
             json={"refresh": refresh_token}
         )
         response.raise_for_status()
-        data = response.json()
+        data = await response.json()
+
+    return await save_token(data)
+
+async def refresh_tokens(refresh_token):
+    async with httpx.AsyncClient(timeout=10.0) as client:
+        response = await client.post(
+            TOKEN_REFRESH_URL,
+            headers=json_headers(),
+            json={"refresh": refresh_token}
+        )
+        response.raise_for_status()
+        data = response.json()  # CORRECTE
 
     return await save_token(data)
 
@@ -88,20 +100,37 @@ async def get_valid_access_token():
         return token.access_token
 
     elif token.refresh_expires_at > now:
+        print('Refreshing access token...')
         return await refresh_tokens(token.refresh_token)
 
     else:
+        print('Access token expired, generating new tokens...')
         return await generate_new_tokens()
     
 #****************************************************
 # 2. Get institutions list by country
 async def async_get_institutions(token: str, country_code: str = "ES"):
+    print(f"Fetching institutions for country: {country_code}")
     url = f"{INSTITUTIONS_URL}?country={country_code}"
 
     async with httpx.AsyncClient(timeout=10.0) as client:
         response = await client.get(url, headers=json_headers(token))
         response.raise_for_status()
         return response.json()
+
+@sync_to_async
+def save_institution(item):
+    return Institutions.objects.update_or_create(
+        id=item['id'],
+        defaults={
+            'name': item['name'],
+            'bic': item['bic'],
+            'transaction_total_days': int(item['transaction_total_days']),
+            'max_access_valid_for_days': int(item['max_access_valid_for_days']),
+            'logo': item['logo'],
+            'countries': item['countries'],
+        }
+    )
 
 # 3. Create an agreement to access bank data
 def create_agreement(

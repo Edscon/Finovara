@@ -1,0 +1,28 @@
+ {% extends 'base/base.html' %}
+
+{% block content%}
+
+<div class="bg-primary_color_bg min-h-screen mt-[-1px]">
+  <div class="flex flex-col justify-center md:justify-between h-full max-md:items-center">
+    <div class="max-w-[95%] lg:max-w-18/20 xl:max-w-16/20 2xl:max-w-15/20 mx-auto pt-2 md:pt-18 w-full flex">
+        <button id="update_institutions" class="max-w-[300px] p-6 rounded-lg bg-secondary_color_bg text-black cursor-pointer">
+            Actualizar Instituciones
+        </button>
+        <div id="loading" class="items-center justify-center mt-4 ml-10">
+            <span class="text-gray-500"></span>
+        </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+document.getElementById('update_institutions').onclick = () => {
+  fetch('update_institutions/')
+    .then(r => r.ok ? r.json() : Promise.reject('Error'))
+    .then(() => document.getElementById('loading').innerHTML = '<span class="text-green-500">Institutions updated successfully!!</span>')
+    .catch(() => document.getElementById('loading').innerHTML = '<span class="text-red-500">Error cargando instituciones.</span>');
+};
+</script>
+
+{% endblock %}

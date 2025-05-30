@@ -6,30 +6,31 @@ import json
 from keys.models import ApiToken
 from .views_requests_api import *
 from core.views import get_menu_items
+from .models import Institutions
 
 import time
 
-@csrf_exempt
-async def institutions_api(request):
+
+def get_institutions():
     try:
-        access_key = await get_valid_access_token()
-        #institutions = await async_get_institutions(access_key, 'es')
+        institutions = list(Institutions.objects.all())
         
         #Ordenamos para que los principales bancos de España salgan primero
         order_names =['Banco Santander', 'BBVA', 'CaixaBank', 'Banco de Sabadell', 'Bankinter', 
                       'ING', 'Openbank', 'Unicaja Banco', 'Abanca', 'Kutxabank', 'Grupo Cajamar', 
                       'IberCaja' 'LiberBank', 'Stripe']
-        order_index = {n:i for i,n in enumerate(order_names)}
-        institutions = sorted(institutions, key=lambda i: order_index.get(i['name'], len(order_names)))
+        order_index = {name: i for i, name in enumerate(order_names)}
+        institutions.sort(key=lambda i: order_index.get(i.name, len(order_names)))
 
-        return JsonResponse(institutions, safe=False)
-    except requests.RequestException as e:
-        return HttpResponseServerError(f"Error obtenint institucions: {str(e)}")
+        return institutions
+    except Exception as e:
+        print(f'Error fetching institutions: {e}')
+        return []
 
 
 def app(request):
 
-    institutions = {}
+    institutions = get_institutions()
     requisition_data = {}
 
     context = {
