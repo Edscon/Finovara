@@ -38,7 +38,7 @@ function MenuButtonListener() {
         }, 200);
     };
 
-    const eventType = "ontouchstart" in window ? "touchstart" : "click";
+    const eventType = "ontouchstart" in window ? "touchend" : "click";
 
     icon_menu.addEventListener(eventType, handleToggle, { passive: false });
     icon_x_mark.addEventListener(eventType, handleToggle, { passive: false });
