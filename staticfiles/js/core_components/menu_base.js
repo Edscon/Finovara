@@ -13,7 +13,7 @@ function MenuButtonListener() {
         icon_x_mark.classList.toggle('hidden');
     };
 
-    ['click', 'touchstart'].forEach(evt => {
+    ['click'].forEach(evt => {
         icon_menu.addEventListener(evt, e => {
             toggleMenu();
         });
@@ -23,8 +23,9 @@ function MenuButtonListener() {
     });
 
 }
-MenuButtonListener();
-
+document.addEventListener('DOMContentLoaded', () => {
+    MenuButtonListener();
+});
 
 function toggleSubmenu() {
     document.querySelectorAll('.toggle-submenu').forEach(button => {
