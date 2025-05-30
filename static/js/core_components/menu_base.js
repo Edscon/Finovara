@@ -6,17 +6,10 @@ function MenuButtonListener() {
     
     if (!submenu || !icon_menu || !icon_x_mark) return;
 
-    const toggleMenu = () => {
-        submenu.classList.toggle('hidden');
-        icon_menu.classList.toggle('hidden');
-        icon_x_mark.classList.toggle('hidden');
-    };
-
-    icon_menu.addEventListener("click", toggleMenu);
-    icon_x_mark.addEventListener("click", toggleMenu);
-
+    submenu.classList.toggle('hidden');
+    icon_menu.classList.toggle('hidden');
+    icon_x_mark.classList.toggle('hidden');   
 }
-MenuButtonListener();
 
 function toggleSubmenu() {
     document.querySelectorAll('.toggle-submenu').forEach(button => {
