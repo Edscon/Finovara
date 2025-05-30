@@ -15,11 +15,9 @@ function MenuButtonListener() {
 
     ['click', 'touchstart'].forEach(evt => {
         icon_menu.addEventListener(evt, e => {
-            e.preventDefault();
             toggleMenu();
         });
         icon_x_mark.addEventListener(evt, e => {
-            e.preventDefault();
             toggleMenu();
         });
     });
