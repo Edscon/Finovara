@@ -8,9 +8,19 @@ function MenuButtonListener() {
     if (!submenu || !icon_menu || !icon_x_mark) return;
 
     const toggleMenu = () => {
-        submenu.classList.toggle('hidden');
-        icon_menu.classList.toggle('hidden');
-        icon_x_mark.classList.toggle('hidden');
+        const isHidden = submenu.classList.contains('hidden');
+
+        if (isHidden) {
+            // Mostrar menú: quitar 'hidden' del submenu, ocultar icono menú y mostrar icono X
+            submenu.classList.remove('hidden');
+            icon_menu.classList.add('hidden');
+            icon_x_mark.classList.remove('hidden');
+        } else {
+            // Ocultar menú: añadir 'hidden' al submenu, mostrar icono menú y ocultar icono X
+            submenu.classList.add('hidden');
+            icon_menu.classList.remove('hidden');
+            icon_x_mark.classList.add('hidden');
+        }
     };
 
     ['click'].forEach(evt => {
