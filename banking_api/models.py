@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import Account
+from users.models import User
 # Create your models here.
 
 class Institutions(models.Model):
@@ -15,7 +15,7 @@ class Institutions(models.Model):
         return self.name
     
 class BankAccount(models.Model):
-    account = models.ForeignKey(Account, related_name='bank_accounts', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='bank_accounts', on_delete=models.CASCADE)
     bank = models.ForeignKey(Institutions, on_delete=models.CASCADE)
     account_number = models.CharField(max_length=34)  # IBAN
     alias = models.CharField(max_length=100, blank=True, null=True)
@@ -23,7 +23,7 @@ class BankAccount(models.Model):
     currency = models.CharField(max_length=3, default='EUR')
 
     class Meta:
-        unique_together = ('account', 'account_number')  # Un mismo usuario no debe tener 2 veces el mismo IBAN
+        unique_together = ('user', 'account_number')  # Un mismo usuario no debe tener 2 veces el mismo IBAN
 
     def __str__(self):
         return f'{self.account_number} ({self.bank.name})'

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
-class Account(models.Model):
+class User(models.Model):
     user = models.OneToOneField(User, related_name='account', on_delete=models.CASCADE)
     email = models.EmailField(unique=True)
     company_name = models.CharField(max_length=100, blank=True, null=True)
