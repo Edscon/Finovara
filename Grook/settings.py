@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'core',
     'keys',
     'banking_api',
+    'users',
 ]
 
 MIDDLEWARE = [
